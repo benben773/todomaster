@@ -21,9 +21,4 @@ public class AddTodoListTest {
         assertThat(todo).isNotNull();
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner( System.in );
-        System.out.print( "Please enter a string : " );
-        System.out.print( "Your input is :" + sc.next( ) );
-    }
 }
