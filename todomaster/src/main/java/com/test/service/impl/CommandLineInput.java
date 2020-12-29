@@ -25,13 +25,18 @@ public class CommandLineInput implements ICommandLineInputSerivce {
     public void parseTodoCommandAndprint(String[] args) {
         Parse parse = new Parse();
         final Command command = parse.parseArray(args);
-        if (!Command.CommandEnum.ADD.equals(command.getCommandType())) {
+        if (Command.CommandEnum.ADD.equals(command.getCommandType())) {
+            addService.add(new Item(args[2]));
+            List<String> todoItems = preparePrintService.getAllTodoItems();
+            Long lastAddIndex = preparePrintService.getLastAddIndex();
+            consoleService.prinAdd(todoItems, lastAddIndex);
+        } else if (Command.CommandEnum.DONE.equals(command.getCommandType())) {
+            int doneIndex = Integer.parseInt(args[2]);
+            addService.done(doneIndex);
+            consoleService.prinDone(doneIndex);
+        } else {
             throw new IllegalArgumentException("error input command!");
         }
-        addService.add(new Item(args[2]));
-        List<String> todoItems = preparePrintService.getAllTodoItems();
-        Long lastAddIndex = preparePrintService.getLastAddIndex();
-        PrintService print = new ConsolePrintServiceImpl();
-        print.print(todoItems,lastAddIndex);
+
     }
 }

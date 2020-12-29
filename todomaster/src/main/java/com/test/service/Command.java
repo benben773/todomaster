@@ -21,7 +21,7 @@ public class Command {
 
     private CommandEnum commandEnumType;
     public enum CommandEnum {
-        Empty(0,"default"),ADD(1,"add");
+        Empty(0,"default"),ADD(1,"add"),DONE(2,"done");
 
         private final int value;
         private final String desc;

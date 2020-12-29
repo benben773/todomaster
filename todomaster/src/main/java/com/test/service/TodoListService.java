@@ -18,7 +18,12 @@ public class TodoListService implements IAddService, IpreparePrintService {
         lastAddIntex = index;
     }
 
-    public Map<Long,Item> getAllTodo() {
+    @Override
+    public void done(long doneIndex) {
+        todos.get(doneIndex).setDone();
+    }
+
+    public Map<Long,Item> getAllTodos() {
         return todos;
     }
 

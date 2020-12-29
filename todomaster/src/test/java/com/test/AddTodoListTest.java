@@ -25,12 +25,12 @@ public class AddTodoListTest {
     public void should_add_one_item_to_empty_itemEntity() {
         TodoListService todoListService = new TodoListService();
         todoListService.add(new Item("name"));
-        Map<Long,Item> todo = todoListService.getAllTodo();
+        Map<Long,Item> todo = todoListService.getAllTodos();
         assertThat(todo.get(1L)).isNotNull();
     }
 
     @Test
-    public void should_parse_intput_array() {
+    public void should_parse_todo_intput_array() {
         String[] args = {"todo", "add", "<item>"};
         Parse parse = new Parse();
         final Command command = parse.parseArray(args);
@@ -39,7 +39,16 @@ public class AddTodoListTest {
         Assertions.assertEquals("<item>", command.getTodoItem());
     }
     @Test
-    public void should_print_correct_info(){
+    public void should_parse_done_intput_array() {
+        String[] args = {"todo", "done", "1"};
+        Parse parse = new Parse();
+        final Command command = parse.parseArray(args);
+        ICommandLineInputSerivce ICommandLineInputSerivce = new CommandLineInput(null,null);
+        Assertions.assertEquals(Command.CommandEnum.DONE, command.getCommandType());
+        Assertions.assertEquals("1", command.getTodoItem());
+    }
+    @Test
+    public void should_print_correct_todo_info(){
         TodoListService todoListService = new TodoListService();
         String value = "name1";
         todoListService.add(new Item(value));
@@ -49,7 +58,21 @@ public class AddTodoListTest {
         Assertions.assertEquals(value, todoItems.get(0));
 
         PrintService consoleService = new ConsolePrintServiceImpl();
-        consoleService.print(todoItems,lastAddIndex);
+        consoleService.prinAdd(todoItems,lastAddIndex);
+
+    }
+    @Test
+    public void should_print_correct_done_info(){
+        TodoListService todoListService = new TodoListService();
+        String value = "name1";
+        todoListService.add(new Item(value));
+        long doneIndex = 1L;
+        todoListService.done(doneIndex);
+        Map<Long, Item> todoItems = todoListService.getAllTodos();
+        Assertions.assertEquals(true, todoItems.get(doneIndex).getDoneStatus());
+
+//        PrintService consoleService = new ConsolePrintServiceImpl();
+//        consoleService.print(todoItems,lastDoneIndex);
 
     }
 

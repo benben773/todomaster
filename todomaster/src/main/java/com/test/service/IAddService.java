@@ -4,4 +4,6 @@ import com.test.bo.Item;
 
 public interface IAddService {
     void add(Item item);
+
+    void done(long doneIndex);
 }

@@ -10,6 +10,7 @@ import com.test.service.Command;
 public class Parse {
 
     public static final String TODO_ADD = "todo add ";
+    public static final String TODO_DONE = "todo done ";
 
     public Command parseArray(String[] args) {
         if (args == null) {
@@ -17,12 +18,17 @@ public class Parse {
         }
         String strInput = ArrayUtil.arrayToString(args).trim();
         Command command = new Command();
-        if (!strInput.startsWith(TODO_ADD) ) {
+        if (strInput.startsWith(TODO_ADD)) {
+            command.setCommandEnumType(Command.CommandEnum.ADD);
+            command.setTodoItem(strInput.replaceAll(TODO_ADD, ""));
+            return command;
+        }else if (strInput.startsWith(TODO_DONE)) {
+            command.setCommandEnumType(Command.CommandEnum.DONE);
+            command.setTodoItem(strInput.replaceAll(TODO_DONE, ""));
+            return command;
+        } else {
             return command;
         }
-        command.setCommandEnumType(Command.CommandEnum.ADD);
-        command.setTodoItem(strInput.replaceAll(TODO_ADD, ""));
-        return command;
     }
 
 }
