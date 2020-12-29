@@ -1,8 +1,7 @@
-package com.test;
+package com.test.service;
 
 import com.sun.deploy.util.ArrayUtil;
-
-import java.util.Arrays;
+import com.test.service.Command;
 
 /**
  * @author ：ls05
@@ -10,23 +9,20 @@ import java.util.Arrays;
  */
 public class Parse {
 
-    public static final String TODO_ADD = "todo add <";
-    public static final String SUFFIX = ">";
+    public static final String TODO_ADD = "todo add ";
 
     public Command parseArray(String[] args) {
         if (args == null) {
             return null;
         }
         String strInput = ArrayUtil.arrayToString(args).trim();
-        if (!strInput.startsWith(TODO_ADD) || !strInput.endsWith(SUFFIX)) {
-            return null;
-        }
         Command command = new Command();
+        if (!strInput.startsWith(TODO_ADD) ) {
+            return command;
+        }
         command.setCommandEnumType(Command.CommandEnum.ADD);
-        command.setTodoItem(strInput.replaceAll(TODO_ADD, "").replaceAll(SUFFIX, ""));
+        command.setTodoItem(strInput.replaceAll(TODO_ADD, ""));
         return command;
-
-
     }
 
 }

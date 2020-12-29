@@ -1,15 +1,20 @@
 package com.test;
 
-import com.sun.deploy.util.ArrayUtil;
+import com.test.service.impl.CommandLineInput;
+import com.test.service.ICommandLineInputSerivce;
+import com.test.bo.Item;
+import com.test.service.Command;
+import com.test.service.Parse;
+import com.test.service.TodoListService;
+import com.test.service.impl.ConsolePrintServiceImpl;
+import com.test.service.PrintService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 /**
  * @author ：ls05
@@ -29,18 +34,23 @@ public class AddTodoListTest {
         String[] args = {"todo", "add", "<item>"};
         Parse parse = new Parse();
         final Command command = parse.parseArray(args);
+        ICommandLineInputSerivce ICommandLineInputSerivce = new CommandLineInput(null,null);
         Assertions.assertEquals(Command.CommandEnum.ADD, command.getCommandType());
-        Assertions.assertEquals("item", command.getTodoItem());
+        Assertions.assertEquals("<item>", command.getTodoItem());
     }
     @Test
     public void should_print_correct_info(){
         TodoListService todoListService = new TodoListService();
         String value = "name1";
         todoListService.add(new Item(value));
-        List<String> strAllTodoItems = todoListService.getAllTodoItems();
+        List<String> todoItems = todoListService.getAllTodoItems();
         Long lastAddIndex = todoListService.getLastAddIndex();
         Assertions.assertEquals(1L, lastAddIndex);
-        Assertions.assertEquals(value, strAllTodoItems.get(0));
+        Assertions.assertEquals(value, todoItems.get(0));
+
+        PrintService consoleService = new ConsolePrintServiceImpl();
+        consoleService.print(todoItems,lastAddIndex);
+
     }
 
 }

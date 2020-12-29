@@ -1,4 +1,4 @@
-package com.test;
+package com.test.service;
 
 /**
  * @author ：ls05
@@ -15,17 +15,13 @@ public class Command {
         this.todoItem = todoItem;
     }
 
-    public CommandEnum getCommandEnumType() {
-        return commandEnumType;
-    }
-
     public void setCommandEnumType(CommandEnum commandEnumType) {
         this.commandEnumType = commandEnumType;
     }
 
     private CommandEnum commandEnumType;
     public enum CommandEnum {
-        ADD(1,"添加");
+        Empty(0,"default"),ADD(1,"add");
 
         private final int value;
         private final String desc;
@@ -35,6 +31,6 @@ public class Command {
         }
     }
     public CommandEnum getCommandType() {
-        return CommandEnum.ADD;
+        return commandEnumType;
     }
 }
