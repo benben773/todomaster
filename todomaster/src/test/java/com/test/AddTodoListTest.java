@@ -1,11 +1,10 @@
 package com.test;
 
+import com.sun.deploy.util.ArrayUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -32,6 +31,16 @@ public class AddTodoListTest {
         final Command command = parse.parseArray(args);
         Assertions.assertEquals(Command.CommandEnum.ADD, command.getCommandType());
         Assertions.assertEquals("item", command.getTodoItem());
+    }
+    @Test
+    public void should_print_correct_info(){
+        TodoListService todoListService = new TodoListService();
+        String value = "name1";
+        todoListService.add(new Item(value));
+        List<String> strAllTodoItems = todoListService.getAllTodoItems();
+        Long lastAddIndex = todoListService.getLastAddIndex();
+        Assertions.assertEquals(1L, lastAddIndex);
+        Assertions.assertEquals(value, strAllTodoItems.get(0));
     }
 
 }
