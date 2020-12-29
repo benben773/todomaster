@@ -1,9 +1,11 @@
 package com.test.service;
 
+import com.test.bo.Item;
+
 import java.util.List;
 
 public interface PrintService {
-    void prinAdd(List<String> todoItems, Long lastAddIndex);
+    void prinAdd(List<Item> todoItems, Long lastAddIndex);
 
     void prinDone(long doneIndex);
 }

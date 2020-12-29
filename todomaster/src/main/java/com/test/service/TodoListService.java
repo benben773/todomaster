@@ -15,6 +15,7 @@ public class TodoListService implements IAddService, IpreparePrintService {
     @Override
     public void add(Item item) {
         todos.put(++index, item);
+        item.setIndex(index);
         lastAddIntex = index;
     }
 
@@ -28,10 +29,10 @@ public class TodoListService implements IAddService, IpreparePrintService {
     }
 
     @Override
-    public List<String> getAllTodoItems() {
-        final List<String> strAllTodoItems = new ArrayList<String>();
+    public List<Item> getAllTodoItems() {
+        final List<Item> strAllTodoItems = new ArrayList<Item>();
         todos.forEach((k,v)->{
-            strAllTodoItems.add(v.getName());});
+            strAllTodoItems.add(v);});
         return strAllTodoItems;
     }
     @Override

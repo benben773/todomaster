@@ -12,6 +12,8 @@ class CommandLineInputTest {
         ICommandLineInputSerivce commandService = new CommandLineInputProx();
         String[] args = {"todo","add","apple"};
         commandService.parseTodoCommandAndprint(args);
+        String[] argsAdd1 = {"todo","add","banan"};
+        commandService.parseTodoCommandAndprint(argsAdd1);
         String[] args1 = {"todo","done","1"};
         commandService.parseTodoCommandAndprint(args1);
 

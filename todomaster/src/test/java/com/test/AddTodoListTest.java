@@ -52,10 +52,10 @@ public class AddTodoListTest {
         TodoListService todoListService = new TodoListService();
         String value = "name1";
         todoListService.add(new Item(value));
-        List<String> todoItems = todoListService.getAllTodoItems();
+        List<Item> todoItems = todoListService.getAllTodoItems();
         Long lastAddIndex = todoListService.getLastAddIndex();
         Assertions.assertEquals(1L, lastAddIndex);
-        Assertions.assertEquals(value, todoItems.get(0));
+        Assertions.assertEquals(value, todoItems.get(0).getName());
 
         PrintService consoleService = new ConsolePrintServiceImpl();
         consoleService.prinAdd(todoItems,lastAddIndex);

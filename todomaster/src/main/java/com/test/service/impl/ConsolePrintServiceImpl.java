@@ -1,5 +1,6 @@
 package com.test.service.impl;
 
+import com.test.bo.Item;
 import com.test.service.PrintService;
 
 import java.util.List;
@@ -9,12 +10,10 @@ import java.util.List;
  * @date ：Created in 2020/12/30 2:08
  */
 public class ConsolePrintServiceImpl implements PrintService {
-    long index = 0L;
     @Override
-    public void prinAdd(List<String> todoItems, Long lastAddIndex) {
+    public void prinAdd(List<Item> todoItems, Long lastAddIndex) {
         todoItems.stream().forEach(s -> {
-            index++;
-            System.out.println(index +".<"+s+">");
+            System.out.println(s.getIndex() +".<"+s.getName()+">");
         });
         System.out.println("Item "+lastAddIndex+" added");
     }

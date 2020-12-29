@@ -6,6 +6,8 @@ package com.test.bo;
  */
 public class Item {
     private boolean isDone = false;
+    private long index;
+
     public String getName() {
         return name;
     }
@@ -23,5 +25,13 @@ public class Item {
 
     public void setDone() {
         isDone = true;
+    }
+
+    public long getIndex() {
+        return this.index ;
+    }
+
+    public void setIndex(Long index) {
+        this.index = index.longValue();
     }
 }

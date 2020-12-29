@@ -27,7 +27,7 @@ public class CommandLineInput implements ICommandLineInputSerivce {
         final Command command = parse.parseArray(args);
         if (Command.CommandEnum.ADD.equals(command.getCommandType())) {
             addService.add(new Item(args[2]));
-            List<String> todoItems = preparePrintService.getAllTodoItems();
+            List<Item> todoItems = preparePrintService.getAllTodoItems();
             Long lastAddIndex = preparePrintService.getLastAddIndex();
             consoleService.prinAdd(todoItems, lastAddIndex);
         } else if (Command.CommandEnum.DONE.equals(command.getCommandType())) {
