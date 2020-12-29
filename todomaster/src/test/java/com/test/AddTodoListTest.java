@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -18,11 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class AddTodoListTest {
     @Test
     public void should_add_one_item_to_empty_itemEntity() {
-
         TodoListService todoListService = new TodoListService();
         todoListService.add(new Item("name"));
-        List<Item> todo = todoListService.getAllTodo();
-        assertThat(todo).isNotNull();
+        Map<Long,Item> todo = todoListService.getAllTodo();
+        assertThat(todo.get(1L)).isNotNull();
     }
 
     @Test
@@ -33,4 +33,5 @@ public class AddTodoListTest {
         Assertions.assertEquals(Command.CommandEnum.ADD, command.getCommandType());
         Assertions.assertEquals("item", command.getTodoItem());
     }
+
 }
