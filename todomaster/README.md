@@ -1,4 +1,6 @@
-##第一阶段：基本功能
+##程序运行方法
+运行com.test.api.TodoApi.main，通过入参解析命令行信息
+##第一阶段：基本功能（完成）
 ###添加 Todo 项。
 todo add <item>
 1. <item>
