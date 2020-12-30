@@ -1,11 +1,9 @@
 package com.test;
 
-import com.test.service.impl.CommandLineInput;
-import com.test.service.ICommandLineInputSerivce;
 import com.test.bo.Item;
-import com.test.service.Command;
+import com.test.bo.Command;
 import com.test.service.Parse;
-import com.test.service.TodoListService;
+import com.test.service.impl.TodoListServiceImpl;
 import com.test.service.impl.ConsolePrintServiceImpl;
 import com.test.service.PrintService;
 import org.junit.jupiter.api.Assertions;
@@ -23,9 +21,9 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class AddTodoListTest {
     @Test
     public void should_add_one_item_to_empty_itemEntity() {
-        TodoListService todoListService = new TodoListService();
-        todoListService.add(new Item("name"));
-        Map<Long,Item> todo = todoListService.getAllTodos();
+        TodoListServiceImpl todoListServiceImpl = new TodoListServiceImpl();
+        todoListServiceImpl.add(new Item("name"));
+        Map<Long,Item> todo = todoListServiceImpl.getAllTodos();
         assertThat(todo.get(1L)).isNotNull();
     }
 
@@ -34,26 +32,31 @@ public class AddTodoListTest {
         String[] args = {"todo", "add", "<item>"};
         Parse parse = new Parse();
         final Command command = parse.parseArray(args);
-        ICommandLineInputSerivce ICommandLineInputSerivce = new CommandLineInput(null,null);
         Assertions.assertEquals(Command.CommandEnum.ADD, command.getCommandType());
         Assertions.assertEquals("<item>", command.getTodoItem());
+    }
+    @Test
+    public void should_parse_show_list_array() {
+        String[] args = {"todo", "list"};
+        Parse parse = new Parse();
+        final Command command = parse.parseArray(args);
+        Assertions.assertEquals(Command.CommandEnum.SHOW_TODOS, command.getCommandType());
     }
     @Test
     public void should_parse_done_intput_array() {
         String[] args = {"todo", "done", "1"};
         Parse parse = new Parse();
         final Command command = parse.parseArray(args);
-        ICommandLineInputSerivce ICommandLineInputSerivce = new CommandLineInput(null,null);
         Assertions.assertEquals(Command.CommandEnum.DONE, command.getCommandType());
         Assertions.assertEquals("1", command.getTodoItem());
     }
     @Test
     public void should_print_correct_todo_info(){
-        TodoListService todoListService = new TodoListService();
+        TodoListServiceImpl todoListServiceImpl = new TodoListServiceImpl();
         String value = "name1";
-        todoListService.add(new Item(value));
-        List<Item> todoItems = todoListService.getAllTodoItems();
-        Long lastAddIndex = todoListService.getLastAddIndex();
+        todoListServiceImpl.add(new Item(value));
+        List<Item> todoItems = todoListServiceImpl.getAllItems();
+        Long lastAddIndex = todoListServiceImpl.getLastAddIndex();
         Assertions.assertEquals(1L, lastAddIndex);
         Assertions.assertEquals(value, todoItems.get(0).getName());
 
@@ -63,12 +66,12 @@ public class AddTodoListTest {
     }
     @Test
     public void should_print_correct_done_info(){
-        TodoListService todoListService = new TodoListService();
+        TodoListServiceImpl todoListServiceImpl = new TodoListServiceImpl();
         String value = "name1";
-        todoListService.add(new Item(value));
+        todoListServiceImpl.add(new Item(value));
         long doneIndex = 1L;
-        todoListService.done(doneIndex);
-        Map<Long, Item> todoItems = todoListService.getAllTodos();
+        todoListServiceImpl.done(doneIndex);
+        Map<Long, Item> todoItems = todoListServiceImpl.getAllTodos();
         Assertions.assertEquals(true, todoItems.get(doneIndex).getDoneStatus());
 
 //        PrintService consoleService = new ConsolePrintServiceImpl();

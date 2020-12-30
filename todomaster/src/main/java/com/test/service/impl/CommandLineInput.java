@@ -1,42 +1,42 @@
 package com.test.service.impl;
 
-import com.test.bo.Item;
+import com.test.bo.Command;
 import com.test.service.*;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ：ls05
  * @date ：Created in 2020/12/29 7:06
  */
-public class CommandLineInput implements ICommandLineInputSerivce {
-    IAddService addService;
-    IpreparePrintService preparePrintService;
+public class CommandLineInput implements CommandLineInputSerivce {
+    PorcessItemservice addService;
+    PreparePrintService preparePrintService;
     PrintService consoleService;
+    CommandService CommandService ;
+    Map<Command.CommandEnum, CommandService> CommandServiceMap = new HashMap<>();
 
-    public CommandLineInput(TodoListService todoListService, PrintService consoleService) {
-        this.addService = todoListService;
-        this.preparePrintService = todoListService;
+    public CommandLineInput(PorcessItemservice addService, PreparePrintService preparePrintService, PrintService consoleService) {
+        this.addService = addService;
+        this.preparePrintService = preparePrintService;
         this.consoleService = consoleService;
+        CommandServiceMap.put(Command.CommandEnum.ADD, new CommandServiceAddImpl(addService, preparePrintService, consoleService));
+        CommandServiceMap.put(Command.CommandEnum.DONE, new CommandServiceDoneImpl(addService, preparePrintService, consoleService));
+        CommandServiceMap.put(Command.CommandEnum.SHOW_TODOS, new CommandServiceShowTodoImpl(addService, preparePrintService, consoleService));
     }
-
 
     @Override
     public void parseTodoCommandAndprint(String[] args) {
         Parse parse = new Parse();
         final Command command = parse.parseArray(args);
-        if (Command.CommandEnum.ADD.equals(command.getCommandType())) {
-            addService.add(new Item(args[2]));
-            List<Item> todoItems = preparePrintService.getAllTodoItems();
-            Long lastAddIndex = preparePrintService.getLastAddIndex();
-            consoleService.prinAdd(todoItems, lastAddIndex);
-        } else if (Command.CommandEnum.DONE.equals(command.getCommandType())) {
-            int doneIndex = Integer.parseInt(args[2]);
-            addService.done(doneIndex);
-            consoleService.prinDone(doneIndex);
-        } else {
+        if (!CommandServiceMap.keySet().contains(command.getCommandType())) {
             throw new IllegalArgumentException("error input command!");
         }
-
+        String name = args.length > 2 ? args[2] : "";
+        CommandServiceMap.get(command.getCommandType()).doCommand(name);
     }
+
+
+
 }

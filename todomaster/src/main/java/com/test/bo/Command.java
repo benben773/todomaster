@@ -1,4 +1,4 @@
-package com.test.service;
+package com.test.bo;
 
 /**
  * @author ：ls05
@@ -21,13 +21,16 @@ public class Command {
 
     private CommandEnum commandEnumType;
     public enum CommandEnum {
-        ADD(1,"add"),DONE(2,"done");
+        ADD(1,"add"),DONE(2,"done"),SHOW_TODOS(3,"show todos");
 
         private final int value;
         private final String desc;
         CommandEnum(int value, String desc) {
             this.value = value;
             this.desc = desc;
+        }
+
+        public class TODO_LIST {
         }
     }
     public CommandEnum getCommandType() {

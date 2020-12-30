@@ -13,7 +13,7 @@ public class ConsolePrintServiceImpl implements PrintService {
     @Override
     public void prinAdd(List<Item> todoItems, Long lastAddIndex) {
         todoItems.stream().forEach(s -> {
-            System.out.println(s.getIndex() +".<"+s.getName()+">");
+            System.out.println(s.getIndex() +"."+s.getName()+"");
         });
         System.out.println("Item "+lastAddIndex+" added");
     }
@@ -22,5 +22,13 @@ public class ConsolePrintServiceImpl implements PrintService {
     public void prinDone(long doneIndex) {
         System.out.println("Item "+doneIndex+" done");
 
+    }
+
+    @Override
+    public void prinItems(List<Item> todoItems) {
+        todoItems.stream().forEach(s -> {
+            System.out.println(s.getIndex() +"."+s.getName()+"");
+        });
+        System.out.println("Total: "+todoItems.size()+"  items");
     }
 }

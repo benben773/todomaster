@@ -8,4 +8,6 @@ public interface PrintService {
     void prinAdd(List<Item> todoItems, Long lastAddIndex);
 
     void prinDone(long doneIndex);
+
+    void prinItems(List<Item> todoItems);
 }

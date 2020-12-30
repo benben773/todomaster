@@ -1,7 +1,7 @@
 package com.test.api;
 
-import com.test.service.impl.CommandLineInputProx;
-import com.test.service.ICommandLineInputSerivce;
+import com.test.service.impl.CommandLineInputProxy;
+import com.test.service.CommandLineInputSerivce;
 
 import java.util.Arrays;
 
@@ -13,7 +13,7 @@ public class TodoApi {
 
     public static void main(String[] args) {
         System.out.println(Arrays.toString(args));
-        ICommandLineInputSerivce commandService = new CommandLineInputProx();
+        CommandLineInputSerivce commandService = new CommandLineInputProxy();
         commandService.parseTodoCommandAndprint(args);
     }
 }

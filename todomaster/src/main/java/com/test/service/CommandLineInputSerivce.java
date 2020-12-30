@@ -5,7 +5,7 @@ package com.test.service;
  * @创建人 ls
  * @创建时间 2020/12/30 2:54
  */
-public interface ICommandLineInputSerivce {
+public interface CommandLineInputSerivce {
     /**
      * 命令行输入解析打印服务
      */
