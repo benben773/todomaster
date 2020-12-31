@@ -8,7 +8,7 @@ import com.test.service.CommandLineInputSerivce;
  */
 public class CommandLineInputProxy implements CommandLineInputSerivce {
 
-    private final CommandLineInputSerivce serivce = new CommandLineInput(new TodoListServiceImpl(),new TodoListServiceImpl(),new ConsolePrintServiceImpl());
+    private final CommandLineInputSerivce serivce = new CommandLineInput(new ProcessServiceImpl(),new PrepareServiceImpl(),new ConsolePrintServiceImpl());
 
     @Override
     public void parseTodoCommandAndprint(String[] args) {

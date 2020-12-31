@@ -11,24 +11,32 @@ import java.util.List;
  */
 public class ConsolePrintServiceImpl implements PrintService {
     @Override
-    public void prinAdd(List<Item> todoItems, Long lastAddIndex) {
-        todoItems.stream().forEach(s -> {
-            System.out.println(s.getIndex() +"."+s.getName()+"");
-        });
-        System.out.println("Item "+lastAddIndex+" added");
+    public void printAdd(Item item) {
+        System.out.println("1."+item.getName());
+        System.out.println("Item <"+item.getIndex()+"> added");
     }
 
     @Override
-    public void prinDone(long doneIndex) {
+    public void printOneItemDone(long doneIndex) {
         System.out.println("Item "+doneIndex+" done");
 
     }
 
     @Override
-    public void prinItems(List<Item> todoItems) {
+    public void printTodoItems(List<Item> todoItems) {
         todoItems.stream().forEach(s -> {
             System.out.println(s.getIndex() +"."+s.getName()+"");
         });
-        System.out.println("Total: "+todoItems.size()+"  items");
+        System.out.println("Total: "+todoItems.size()+" items");
+    }
+
+    @Override
+    public void printAllItems(List<Item> allItems) {
+        allItems.forEach(item -> {
+            String doneStatus = item.getDoneStatus()?"[Done]":"";
+            System.out.println(item.getIndex() + "."+doneStatus + item.getName());
+        });
+        long count = allItems.stream().filter(Item::getDoneStatus).count();
+        System.out.println("Total: "+allItems.size()+" items," +count +" item done");
     }
 }

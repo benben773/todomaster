@@ -3,7 +3,7 @@ package com.test;
 import com.test.bo.Item;
 import com.test.bo.Command;
 import com.test.service.Parse;
-import com.test.service.impl.TodoListServiceImpl;
+import com.test.service.impl.ProcessServiceImpl;
 import com.test.service.impl.ConsolePrintServiceImpl;
 import com.test.service.PrintService;
 import org.junit.jupiter.api.Assertions;
@@ -21,9 +21,9 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class AddTodoListTest {
     @Test
     public void should_add_one_item_to_empty_itemEntity() {
-        TodoListServiceImpl todoListServiceImpl = new TodoListServiceImpl();
-        todoListServiceImpl.add(new Item("name"));
-        Map<Long,Item> todo = todoListServiceImpl.getAllTodos();
+        ProcessServiceImpl processServiceImpl = new ProcessServiceImpl();
+        processServiceImpl.add(new Item("name"));
+        Map<Long,Item> todo = processServiceImpl.getAllTodosByKey();
         assertThat(todo.get(1L)).isNotNull();
     }
 
@@ -52,31 +52,26 @@ public class AddTodoListTest {
     }
     @Test
     public void should_print_correct_todo_info(){
-        TodoListServiceImpl todoListServiceImpl = new TodoListServiceImpl();
+        ProcessServiceImpl processServiceImpl = new ProcessServiceImpl();
         String value = "name1";
-        todoListServiceImpl.add(new Item(value));
-        List<Item> todoItems = todoListServiceImpl.getAllItems();
-        Long lastAddIndex = todoListServiceImpl.getLastAddIndex();
-        Assertions.assertEquals(1L, lastAddIndex);
+        Item added = processServiceImpl.add(new Item(value));
+        List<Item> todoItems = processServiceImpl.getAllItems();
+        Assertions.assertEquals(1L, added.getIndex());
         Assertions.assertEquals(value, todoItems.get(0).getName());
 
         PrintService consoleService = new ConsolePrintServiceImpl();
-        consoleService.prinAdd(todoItems,lastAddIndex);
+        consoleService.printTodoItems(todoItems);
 
     }
     @Test
     public void should_print_correct_done_info(){
-        TodoListServiceImpl todoListServiceImpl = new TodoListServiceImpl();
+        ProcessServiceImpl processServiceImpl = new ProcessServiceImpl();
         String value = "name1";
-        todoListServiceImpl.add(new Item(value));
+        processServiceImpl.add(new Item(value));
         long doneIndex = 1L;
-        todoListServiceImpl.done(doneIndex);
-        Map<Long, Item> todoItems = todoListServiceImpl.getAllTodos();
+        processServiceImpl.done(doneIndex);
+        Map<Long, Item> todoItems = processServiceImpl.getAllTodosByKey();
         Assertions.assertEquals(true, todoItems.get(doneIndex).getDoneStatus());
-
-//        PrintService consoleService = new ConsolePrintServiceImpl();
-//        consoleService.print(todoItems,lastDoneIndex);
-
     }
 
 }

@@ -21,7 +21,8 @@ public class Command {
 
     private CommandEnum commandEnumType;
     public enum CommandEnum {
-        ADD(1,"add"),DONE(2,"done"),SHOW_TODOS(3,"show todos");
+        ADD(1,"add"),DONE(2,"done"),SHOW_TODOS(3,"show todos")
+        ,SHOW_ALL_ITEM(4,"all item");
 
         private final int value;
         private final String desc;

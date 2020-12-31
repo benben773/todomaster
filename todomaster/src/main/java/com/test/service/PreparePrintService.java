@@ -12,9 +12,5 @@ import java.util.List;
 
 public interface PreparePrintService {
 
-    List<Item> getAllItems();
-
-    Long getLastAddIndex();
-
-    List<Item> getTodoItems();
+    List<Item> getTodoItems(List<Item> items);
 }

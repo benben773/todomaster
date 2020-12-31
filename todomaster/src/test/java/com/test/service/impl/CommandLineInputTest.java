@@ -12,7 +12,9 @@ class CommandLineInputTest {
     @ParameterizedTest
     @CsvSource({
             "todo add apple,todo add banana,todo done 1",
-            "todo add apple,todo add banana,todo done 2"
+            "todo add apple,todo add banana,todo done 2",
+            "todo add apple,todo add banana,todo list --all",
+            "todo add apple,todo done 1,todo list --all"
     })
     public void should_get_item_done(String arg1,String arg2,String arg3) {
         LinkedList<String[] > inputs = new LinkedList<>();

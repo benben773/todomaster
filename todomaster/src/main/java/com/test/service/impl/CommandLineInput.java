@@ -11,19 +11,20 @@ import java.util.Map;
  * @date ：Created in 2020/12/29 7:06
  */
 public class CommandLineInput implements CommandLineInputSerivce {
-    PorcessItemservice addService;
+    ProcessItemservice addService;
     PreparePrintService preparePrintService;
     PrintService consoleService;
     CommandService CommandService ;
     Map<Command.CommandEnum, CommandService> CommandServiceMap = new HashMap<>();
 
-    public CommandLineInput(PorcessItemservice addService, PreparePrintService preparePrintService, PrintService consoleService) {
+    public CommandLineInput(ProcessItemservice addService, PreparePrintService preparePrintService, PrintService consoleService) {
         this.addService = addService;
         this.preparePrintService = preparePrintService;
         this.consoleService = consoleService;
         CommandServiceMap.put(Command.CommandEnum.ADD, new CommandServiceAddImpl(addService, preparePrintService, consoleService));
         CommandServiceMap.put(Command.CommandEnum.DONE, new CommandServiceDoneImpl(addService, preparePrintService, consoleService));
         CommandServiceMap.put(Command.CommandEnum.SHOW_TODOS, new CommandServiceShowTodoImpl(addService, preparePrintService, consoleService));
+        CommandServiceMap.put(Command.CommandEnum.SHOW_ALL_ITEM, new CommandServiceShowAllItemImpl(addService, preparePrintService, consoleService));
     }
 
     @Override

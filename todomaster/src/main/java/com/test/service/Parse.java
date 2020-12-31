@@ -27,6 +27,9 @@ public class Parse {
             command.setCommandEnumType(Command.CommandEnum.DONE);
             command.setTodoItem(strInput.replaceAll(TODO_DONE, ""));
             return command;
+        }else if (strInput.startsWith(TODO_LIST) && strInput.endsWith("--all")) {
+            command.setCommandEnumType(Command.CommandEnum.SHOW_ALL_ITEM);
+            return command;
         }else if (strInput.startsWith(TODO_LIST)) {
             command.setCommandEnumType(Command.CommandEnum.SHOW_TODOS);
             return command;
