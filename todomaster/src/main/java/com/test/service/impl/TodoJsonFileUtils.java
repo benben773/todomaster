@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
  * @author ：ls05
  * @date ：Created in 2021/1/2 9:08
  */
-public class TodoJsonFileUtils {
-    public static final String filePath = "C:/data/todoList.json";
+public class TodoJsonFileUtils<T> {
+    public static final String filePath = System.getProperty("user.home") + "/todoList.json";
     public static final String UTF_8 = "UTF-8";
     public static final Item initItem = new Item("");
     public static final Charset CHARSET = Charset.forName(UTF_8);
@@ -62,8 +62,12 @@ public class TodoJsonFileUtils {
         return items;
     }
 
-    public void writeAllItem(List<Item> items) throws IOException {
-        File file = new File(filePath);
+    public void writeAllItem(List<T> items) throws IOException {
+        writeCollectionToFile(items, filePath);
+    }
+
+    public void writeCollectionToFile(List<T> items, String filePathtemp) throws IOException {
+        File file = new File(filePathtemp);
         List<String> lines = items.stream().map(item -> {
             try {
                 return objectMapper.writeValueAsString(item);

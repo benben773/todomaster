@@ -7,5 +7,5 @@ import java.io.IOException;
  * @date ：Created in 2020/12/30 7:40
  */
 public interface CommandService {
-    void doCommand(String name) throws IOException;
+    void doCommand(String[] args) throws IOException;
 }

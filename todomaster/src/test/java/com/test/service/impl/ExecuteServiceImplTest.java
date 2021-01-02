@@ -1,19 +1,20 @@
 package com.test.service.impl;
 
-import com.test.service.CommandLineInputSerivce;
+import com.test.service.ExecuService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.LinkedList;
 
-class CommandLineInputTest {
+class ExecuteServiceImplTest {
 
     @ParameterizedTest
     @CsvSource({
             "todo add apple,todo add banana,todo done 1",
             "todo add apple,todo add banana,todo done 2",
             "todo add apple,todo add banana,todo list --all",
+            "todo add apple,todo add banana,todo login -u user",
             "todo add apple,todo done 1,todo list --all"
     })
     public void should_get_item_done(String arg1,String arg2,String arg3) {
@@ -34,7 +35,7 @@ class CommandLineInputTest {
     }
 
     private void processCommand(LinkedList<String[]> inputs) {
-        CommandLineInputSerivce commandService = new CommandLineInputProxy();
-        inputs.forEach(commandService::parseTodoCommandAndprint);
+        ExecuService commandService = new ExecuServiceProxy();
+        inputs.forEach(commandService::execute);
     }
 }

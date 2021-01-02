@@ -21,17 +21,12 @@ public class Command {
 
     private CommandEnum commandEnumType;
     public enum CommandEnum {
-        ADD(1,"add"),DONE(2,"done"),SHOW_TODOS(3,"show todos")
-        ,SHOW_ALL_ITEM(4,"all item");
+        add("add"), done("done"), list("list")
+        , listall("list--all"), loginu("loginu"),logout("logout");
 
-        private final int value;
-        private final String desc;
-        CommandEnum(int value, String desc) {
+        private final String value;
+        CommandEnum(String value) {
             this.value = value;
-            this.desc = desc;
-        }
-
-        public class TODO_LIST {
         }
     }
     public CommandEnum getCommandType() {

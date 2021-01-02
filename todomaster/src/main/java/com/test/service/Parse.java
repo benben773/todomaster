@@ -1,6 +1,7 @@
 package com.test.service;
 
 import com.test.bo.Command;
+import org.apache.commons.lang3.EnumUtils;
 
 import java.util.Arrays;
 
@@ -10,34 +11,25 @@ import java.util.Arrays;
  */
 public class Parse {
 
-    public static final String TODO_ADD = "add";
-    public static final String TODO_DONE = "done";
-    public static final String TODO_LIST = "list";
+    public static final String paramSubTag = "-";
 
     public Command parseArray(String[] args) {
         if (args == null) {
             return null;
         }
-        String strInput = args[1];
+        String commandName = args[1];
         String param = args.length > 2 ? args[2] : "";
-        Command command = new Command();
-        if (strInput.startsWith(TODO_ADD)) {
-            command.setCommandEnumType(Command.CommandEnum.ADD);
-            command.setTodoItem(param);
-            return command;
-        }else if (strInput.startsWith(TODO_DONE)) {
-            command.setCommandEnumType(Command.CommandEnum.DONE);
-            command.setTodoItem(param);
-            return command;
-        }else if (strInput.startsWith(TODO_LIST) && param.equals("--all")) {
-            command.setCommandEnumType(Command.CommandEnum.SHOW_ALL_ITEM);
-            return command;
-        }else if (strInput.startsWith(TODO_LIST)) {
-            command.setCommandEnumType(Command.CommandEnum.SHOW_TODOS);
-            return command;
-        } else {
-            return command;
+        if (param.startsWith(paramSubTag)) {
+            commandName = commandName + param.replaceAll(paramSubTag,"");
         }
+        return defineCommand(param, Enum.valueOf(Command.CommandEnum.class,commandName));
+    }
+
+    private Command defineCommand(String param, Command.CommandEnum add) {
+        Command command = new Command();
+        command.setCommandEnumType(add);
+        command.setTodoItem(param);
+        return command;
     }
 
 }

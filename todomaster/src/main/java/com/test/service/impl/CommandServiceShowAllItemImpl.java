@@ -2,7 +2,6 @@ package com.test.service.impl;
 
 import com.test.bo.Item;
 import com.test.service.CommandService;
-import com.test.service.PreparePrintService;
 import com.test.service.PrintService;
 import com.test.service.ProcessItemservice;
 
@@ -23,7 +22,7 @@ public class CommandServiceShowAllItemImpl implements CommandService {
     }
 
     @Override
-    public void doCommand(String name) throws IOException {
+    public void doCommand(String[] args) throws IOException {
         List<Item> allItems = processItemservice.getAllItems();
         consoleService.printAllItems(allItems);
     }

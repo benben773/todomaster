@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class ProcessTxtServiceImpl implements ProcessItemservice {
 
-    TodoJsonFileUtils todoFieUtils = new TodoJsonFileUtils();
+    TodoJsonFileUtils<Item> todoFieUtils = new TodoJsonFileUtils();
 
     @Override
     public Item add(final Item item) throws IOException {

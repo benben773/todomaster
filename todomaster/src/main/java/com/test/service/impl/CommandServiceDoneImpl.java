@@ -21,8 +21,8 @@ public class CommandServiceDoneImpl implements CommandService {
     }
 
     @Override
-    public void doCommand(String name) throws IOException {
-        int doneIndex = Integer.parseInt(name);
+    public void doCommand(String[] args) throws IOException {
+        int doneIndex = Integer.parseInt(args[2]);
         addService.done(doneIndex);
         consoleService.printOneItemDone(doneIndex);
     }

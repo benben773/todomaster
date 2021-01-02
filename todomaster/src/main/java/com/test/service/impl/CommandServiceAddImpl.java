@@ -2,12 +2,11 @@ package com.test.service.impl;
 
 import com.test.bo.Item;
 import com.test.service.CommandService;
-import com.test.service.ProcessItemservice;
 import com.test.service.PreparePrintService;
 import com.test.service.PrintService;
+import com.test.service.ProcessItemservice;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author ：ls05
@@ -24,8 +23,8 @@ public class CommandServiceAddImpl implements CommandService {
     }
 
     @Override
-    public void doCommand(String name) throws IOException {
-        Item itemAdded = processItemservice.add(new Item(name));
+    public void doCommand(String[] args) throws IOException {
+        Item itemAdded = processItemservice.add(new Item(args[2]));
         consoleService.printAdd(itemAdded);
     }
 }

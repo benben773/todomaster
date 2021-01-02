@@ -25,7 +25,7 @@ public class CommandServiceShowTodoImpl implements CommandService {
     }
 
     @Override
-    public void doCommand(String name) throws IOException {
+    public void doCommand(String[] args) throws IOException {
         List<Item> todoItems = preparePrintService.getTodoItems(processItemservice.getAllItems());
         consoleService.printTodoItems(todoItems);
     }

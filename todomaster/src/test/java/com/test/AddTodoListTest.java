@@ -70,7 +70,7 @@ public class AddTodoListTest {
         String[] args = {"todo", "add", "<item>"};
         Parse parse = new Parse();
         final Command command = parse.parseArray(args);
-        Assertions.assertEquals(Command.CommandEnum.ADD, command.getCommandType());
+        Assertions.assertEquals(Command.CommandEnum.add, command.getCommandType());
         Assertions.assertEquals("<item>", command.getTodoItem());
     }
     @Test
@@ -78,14 +78,14 @@ public class AddTodoListTest {
         String[] args = {"todo", "list"};
         Parse parse = new Parse();
         final Command command = parse.parseArray(args);
-        Assertions.assertEquals(Command.CommandEnum.SHOW_TODOS, command.getCommandType());
+        Assertions.assertEquals(Command.CommandEnum.list, command.getCommandType());
     }
     @Test
     public void should_parse_done_intput_array() {
         String[] args = {"todo", "done", "1"};
         Parse parse = new Parse();
         final Command command = parse.parseArray(args);
-        Assertions.assertEquals(Command.CommandEnum.DONE, command.getCommandType());
+        Assertions.assertEquals(Command.CommandEnum.done, command.getCommandType());
         Assertions.assertEquals("1", command.getTodoItem());
     }
 
