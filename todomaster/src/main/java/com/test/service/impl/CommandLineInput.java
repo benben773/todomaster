@@ -3,6 +3,7 @@ package com.test.service.impl;
 import com.test.bo.Command;
 import com.test.service.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,8 +24,8 @@ public class CommandLineInput implements CommandLineInputSerivce {
         this.consoleService = consoleService;
         CommandServiceMap.put(Command.CommandEnum.ADD, new CommandServiceAddImpl(addService, preparePrintService, consoleService));
         CommandServiceMap.put(Command.CommandEnum.DONE, new CommandServiceDoneImpl(addService, preparePrintService, consoleService));
-        CommandServiceMap.put(Command.CommandEnum.SHOW_TODOS, new CommandServiceShowTodoImpl(addService, preparePrintService, consoleService));
-        CommandServiceMap.put(Command.CommandEnum.SHOW_ALL_ITEM, new CommandServiceShowAllItemImpl(addService, preparePrintService, consoleService));
+        CommandServiceMap.put(Command.CommandEnum.SHOW_TODOS, new CommandServiceShowTodoImpl(addService,preparePrintService, consoleService));
+        CommandServiceMap.put(Command.CommandEnum.SHOW_ALL_ITEM, new CommandServiceShowAllItemImpl(addService, consoleService));
     }
 
     @Override
@@ -35,7 +36,11 @@ public class CommandLineInput implements CommandLineInputSerivce {
             throw new IllegalArgumentException("error input command!");
         }
         String name = args.length > 2 ? args[2] : "";
-        CommandServiceMap.get(command.getCommandType()).doCommand(name);
+        try {
+            CommandServiceMap.get(command.getCommandType()).doCommand(name);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

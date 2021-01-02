@@ -6,6 +6,7 @@ import com.test.service.ProcessItemservice;
 import com.test.service.PreparePrintService;
 import com.test.service.PrintService;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class CommandServiceAddImpl implements CommandService {
     }
 
     @Override
-    public void doCommand(String name) {
+    public void doCommand(String name) throws IOException {
         Item itemAdded = processItemservice.add(new Item(name));
         consoleService.printAdd(itemAdded);
     }

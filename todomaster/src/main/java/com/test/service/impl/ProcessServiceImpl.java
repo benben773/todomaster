@@ -13,18 +13,19 @@ import java.util.stream.Collectors;
  */
 public class ProcessServiceImpl implements ProcessItemservice {
 
-    static Map<Long, Item> todos = new HashMap<Long,Item>();
-    static long index = 1L;
+    public static Map<Long, Item> todos = new HashMap<Long, Item>();
 
     public ProcessServiceImpl() {
-        todos = new HashMap<>();
-        index = 1L;
     }
+
     @Override
     public Item add(Item item) {
+        long index = todos.keySet().stream().mapToLong(value -> {
+            return value.longValue();
+        }).max().orElse(0L);
+        index++;
         todos.put(index, item);
         item.setIndex(index);
-        index++;
         return item;
     }
 
@@ -33,15 +34,16 @@ public class ProcessServiceImpl implements ProcessItemservice {
         todos.get(doneIndex).setDone();
     }
 
-    public Map<Long,Item> getAllTodosByKey() {
+    public Map<Long, Item> getAllTodosByKey() {
         return todos;
     }
 
     @Override
     public List<Item> getAllItems() {
         final List<Item> strAllTodoItems = new ArrayList<Item>();
-        todos.forEach((k,v)->{
-            strAllTodoItems.add(v);});
+        todos.forEach((k, v) -> {
+            strAllTodoItems.add(v);
+        });
         return strAllTodoItems;
     }
 }

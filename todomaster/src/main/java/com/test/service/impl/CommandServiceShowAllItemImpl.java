@@ -6,6 +6,7 @@ import com.test.service.PreparePrintService;
 import com.test.service.PrintService;
 import com.test.service.ProcessItemservice;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -14,17 +15,15 @@ import java.util.List;
  */
 public class CommandServiceShowAllItemImpl implements CommandService {
     ProcessItemservice processItemservice;
-    PreparePrintService preparePrintService;
     PrintService consoleService;
 
-    public CommandServiceShowAllItemImpl(ProcessItemservice processItemservice, PreparePrintService preparePrintService, PrintService consoleService) {
+    public CommandServiceShowAllItemImpl(ProcessItemservice processItemservice, PrintService consoleService) {
         this.processItemservice = processItemservice;
-        this.preparePrintService = preparePrintService;
         this.consoleService = consoleService;
     }
 
     @Override
-    public void doCommand(String name) {
+    public void doCommand(String name) throws IOException {
         List<Item> allItems = processItemservice.getAllItems();
         consoleService.printAllItems(allItems);
     }

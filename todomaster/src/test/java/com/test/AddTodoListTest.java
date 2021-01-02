@@ -6,9 +6,9 @@ import com.test.service.Parse;
 import com.test.service.impl.ProcessServiceImpl;
 import com.test.service.impl.ConsolePrintServiceImpl;
 import com.test.service.PrintService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,13 +19,51 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
  * @date ：Created in 2020/12/28 19:28
  */
 public class AddTodoListTest {
-    @Test
-    public void should_add_one_item_to_empty_itemEntity() {
-        ProcessServiceImpl processServiceImpl = new ProcessServiceImpl();
-        processServiceImpl.add(new Item("name"));
-        Map<Long,Item> todo = processServiceImpl.getAllTodosByKey();
-        assertThat(todo.get(1L)).isNotNull();
+    ProcessServiceImpl processServiceImpl ;
+
+
+    @DisplayName("given new todos")
+    @Nested
+    class when_new_process_service {
+        @BeforeEach
+        void setUp() {
+            processServiceImpl = new ProcessServiceImpl();
+            ProcessServiceImpl.todos = new HashMap<>();
+        }
+        @Test
+        public void can_add() {
+            Item item = new Item("name");
+            processServiceImpl.add(item);
+            Map<Long, Item> todo = processServiceImpl.getAllTodosByKey();
+
+            item.setIndex(1L);
+            assertThat(todo.get(1L)).isEqualTo(item);
+            assertThat(todo.size()).isEqualTo(1);
+        }
+        @Test
+        public void should_print_correct_todo_info(){
+            String value = "name1";
+            Item added = processServiceImpl.add(new Item(value));
+            List<Item> todoItems = processServiceImpl.getAllItems();
+            Assertions.assertEquals(1L, added.getIndex());
+            Assertions.assertEquals(value, todoItems.get(0).getName());
+
+            PrintService consoleService = new ConsolePrintServiceImpl();
+            consoleService.printTodoItems(todoItems);
+
+        }
+        @Test
+        public void should_print_correct_done_info(){
+            String value = "name1";
+            processServiceImpl.add(new Item(value));
+            long doneIndex = 1L;
+            processServiceImpl.done(doneIndex);
+            Map<Long, Item> todoItems = processServiceImpl.getAllTodosByKey();
+            Assertions.assertEquals(true, todoItems.get(doneIndex).getDone());
+        }
     }
+
+
 
     @Test
     public void should_parse_todo_intput_array() {
@@ -50,28 +88,6 @@ public class AddTodoListTest {
         Assertions.assertEquals(Command.CommandEnum.DONE, command.getCommandType());
         Assertions.assertEquals("1", command.getTodoItem());
     }
-    @Test
-    public void should_print_correct_todo_info(){
-        ProcessServiceImpl processServiceImpl = new ProcessServiceImpl();
-        String value = "name1";
-        Item added = processServiceImpl.add(new Item(value));
-        List<Item> todoItems = processServiceImpl.getAllItems();
-        Assertions.assertEquals(1L, added.getIndex());
-        Assertions.assertEquals(value, todoItems.get(0).getName());
 
-        PrintService consoleService = new ConsolePrintServiceImpl();
-        consoleService.printTodoItems(todoItems);
-
-    }
-    @Test
-    public void should_print_correct_done_info(){
-        ProcessServiceImpl processServiceImpl = new ProcessServiceImpl();
-        String value = "name1";
-        processServiceImpl.add(new Item(value));
-        long doneIndex = 1L;
-        processServiceImpl.done(doneIndex);
-        Map<Long, Item> todoItems = processServiceImpl.getAllTodosByKey();
-        Assertions.assertEquals(true, todoItems.get(doneIndex).getDoneStatus());
-    }
 
 }

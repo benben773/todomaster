@@ -6,6 +6,7 @@ import com.test.service.ProcessItemservice;
 import com.test.service.PreparePrintService;
 import com.test.service.PrintService;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class CommandServiceShowTodoImpl implements CommandService {
     }
 
     @Override
-    public void doCommand(String name) {
+    public void doCommand(String name) throws IOException {
         List<Item> todoItems = preparePrintService.getTodoItems(processItemservice.getAllItems());
         consoleService.printTodoItems(todoItems);
     }

@@ -33,10 +33,10 @@ public class ConsolePrintServiceImpl implements PrintService {
     @Override
     public void printAllItems(List<Item> allItems) {
         allItems.forEach(item -> {
-            String doneStatus = item.getDoneStatus()?"[Done]":"";
+            String doneStatus = item.getDone()?"[Done]":"";
             System.out.println(item.getIndex() + "."+doneStatus + item.getName());
         });
-        long count = allItems.stream().filter(Item::getDoneStatus).count();
+        long count = allItems.stream().filter(Item::getDone).count();
         System.out.println("Total: "+allItems.size()+" items," +count +" item done");
     }
 }

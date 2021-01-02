@@ -5,8 +5,11 @@ package com.test.bo;
  * @date ：Created in 2020/12/28 19:34
  */
 public class Item {
-    private boolean isDone = false;
+    private boolean done = false;
     private long index;
+
+    public Item() {
+    }
 
     public String getName() {
         return name;
@@ -15,16 +18,16 @@ public class Item {
     private String name;
 
     public Item(String name) {
-
+        index = 0L;
         this.name = name;
     }
 
-    public boolean getDoneStatus() {
-        return isDone;
+    public boolean getDone() {
+        return done;
     }
 
     public void setDone() {
-        isDone = true;
+        done = true;
     }
 
     public long getIndex() {
