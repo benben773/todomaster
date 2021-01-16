@@ -1,5 +1,6 @@
 package com.test.service.impl;
 
+import com.test.bo.Item;
 import com.test.service.CommandService;
 import com.test.service.ProcessItemservice;
 import com.test.service.PrintService;
@@ -22,7 +23,7 @@ public class CommandServiceDoneImpl implements CommandService {
     @Override
     public void doCommand(String[] args) throws IOException {
         int doneIndex = Integer.parseInt(args[2]);
-        addService.done(doneIndex);
+        Item done = addService.done(doneIndex);
         consoleService.printOneItemDone(doneIndex);
     }
 }

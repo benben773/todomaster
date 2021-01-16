@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ProcessItemservice {
-    void done(long doneIndex) throws IOException;
+    Item done(long doneIndex) throws IOException;
     List<Item> getUserItems() throws IOException;
 
     Item addUserItem(Item item) throws IOException;
