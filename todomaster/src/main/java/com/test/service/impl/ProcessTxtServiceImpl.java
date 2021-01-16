@@ -22,8 +22,7 @@ public class ProcessTxtServiceImpl implements ProcessItemservice {
         todoFieUtils.writeAllItem(items);
     }
 
-    @Override
-    public List<Item> getAllItems() throws IOException {
+    private List<Item> getAllItems() throws IOException {
         return todoFieUtils.getAllItems();
     }
 

@@ -28,7 +28,7 @@ class ConsolePrintServiceImplTest {
         processItemservice.addUserItem(new Item("apple1"));
         processItemservice.addUserItem(new Item("appledone"));
         processItemservice.done(3L);
-        List<Item> allItems = processItemservice.getAllItems();
+        List<Item> allItems = processItemservice.getUserItems();
         assertEquals(3, allItems.size());
         assertEquals(true, allItems.get(2).getDone());
         assertEquals(false, allItems.get(1).getDone());

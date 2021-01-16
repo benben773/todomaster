@@ -35,7 +35,7 @@ public class ProcessTxtServiceImplTest {
             File todoFile = new File("C:/data/todoList.json");
             assertEquals(true, todoFile.exists());
             processTxtService.done(1L);
-            List<Item> allItems = processTxtService.getAllItems();
+            List<Item> allItems = processTxtService.getUserItems();
             assertEquals(3, allItems.size());
             assertTrue(allItems.get(0).getDone());
             assertTrue(!allItems.get(1).getDone());

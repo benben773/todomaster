@@ -28,7 +28,7 @@ class CommandLogoutServiceImplTest {
 
         @BeforeEach
         void setUp() throws IOException {
-            userInfoSerivce.writeCurrentUserInof(userWithIndex2);
+            userInfoSerivce.writeCurrentUserInfo(userWithIndex2);
             TodoJsonFileUtils todoFieUtils = new TodoJsonFileUtils();
             todoFieUtils.cleanFile();
         }

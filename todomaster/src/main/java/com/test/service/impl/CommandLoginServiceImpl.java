@@ -27,23 +27,11 @@ public class CommandLoginServiceImpl implements CommandService {
     }
 
     @Override
-    public void doCommand(String[] args) throws IOException {
+    public void doCommand(String[] args)  {
         System.out.println("Password:");
         String userName = args[3];
-        boolean contains = userInfoSerivce.getUserInfo().stream().map(UserBo::getName).collect(Collectors.toList())
-                .contains(userName);
-        if (!contains) {
-            System.out.println("Login error!");
-            return;
-        }
         Scanner reader = new Scanner(System.in);
         String password = reader.nextLine();
-        Optional<UserBo> any = userInfoSerivce.getUserInfo().stream().filter(userBo -> userBo.getName().equals(userName) && userBo.getPassword().equals(password)).findAny();
-        if (any.isPresent()) {
-            userInfoSerivce.writeCurrentUserInof(any.get().getIndex());
-            System.out.println("Login success!");
-        } else {
-            System.out.println("password error!");
-        }
+        userInfoSerivce.login(userName,password);
     }
 }

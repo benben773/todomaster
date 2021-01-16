@@ -6,7 +6,10 @@ import com.test.bo.UserBo;
 import java.util.List;
 
 public interface UserInfoSerivce {
-    List<UserBo> getUserInfo();
+    List<UserBo> getUserInfos();
 
-    CurrentUserBo writeCurrentUserInof(String userId);
+    CurrentUserBo writeCurrentUserInfo(String userId);
+    CurrentUserBo getCurrentUserInfo();
+
+    void login(String userName,String password);
 }

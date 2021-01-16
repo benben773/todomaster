@@ -5,17 +5,16 @@ package com.test.bo;
  * @date ：Created in 2021/1/2 19:34
  */
 public class CurrentUserBo {
-    private long index;
-    private String  userId;
+    private String index;
 
     public CurrentUserBo() {
     }
 
-    public CurrentUserBo(String userId) {
-        this.userId = userId;
+    public CurrentUserBo(String index) {
+        this.index = index;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getIndex() {
+        return index;
     }
 }

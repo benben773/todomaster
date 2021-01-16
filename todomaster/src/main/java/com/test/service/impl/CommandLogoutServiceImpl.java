@@ -1,6 +1,5 @@
 package com.test.service.impl;
 
-import com.test.bo.Item;
 import com.test.service.*;
 
 import java.io.IOException;
@@ -21,6 +20,6 @@ public class CommandLogoutServiceImpl implements CommandService {
 
     @Override
     public void doCommand(String[] args) throws IOException {
-        userInfoSerivce.writeCurrentUserInof("-1");
+        userInfoSerivce.writeCurrentUserInfo("-1");
     }
 }

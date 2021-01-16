@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.bo.CurrentUserBo;
 import com.test.bo.Item;
-import com.test.bo.UserBo;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -27,21 +26,6 @@ public class TodoJsonFileUtils<T> {
     public static final Charset CHARSET = Charset.forName(UTF_8);
     ObjectMapper objectMapper = new ObjectMapper();
     public static final String ERROR_INDEX = "-1";
-
-    public Item getLastItem() throws IOException {
-        File file = new File(filePath);
-        if (!file.exists()) {
-            file.createNewFile();
-            return initItem;
-        }
-        List<String> strings = FileUtils.readLines(file, CHARSET);
-        if (strings == null || strings.size() <= 0) {
-            return initItem;
-        }
-        String itemJson = strings.get(strings.size()-1);
-        return objectMapper.readValue(itemJson, Item.class);
-
-    }
 
     public void writeNewItem(Item itemNew) throws IOException {
         File file = new File(filePath);
@@ -102,7 +86,7 @@ public class TodoJsonFileUtils<T> {
                 e.printStackTrace();
                 return new CurrentUserBo(ERROR_INDEX);
             }
-        }).map(CurrentUserBo::getUserId).findAny();
+        }).map(CurrentUserBo::getIndex).findAny();
         if (any.isPresent()) {
             return any.get();
         } else {

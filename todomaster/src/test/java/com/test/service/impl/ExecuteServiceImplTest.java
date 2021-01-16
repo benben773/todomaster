@@ -19,7 +19,7 @@ class ExecuteServiceImplTest {
     public static final String todo_config_path = System.getProperty("user.home") +"/.todo-config";
     @BeforeEach
     void setUp() throws IOException {
-        userInfoSerivce.writeCurrentUserInof(userWithId2);
+        userInfoSerivce.writeCurrentUserInfo(userWithId2);
         TodoJsonFileUtils todoFieUtils = new TodoJsonFileUtils();
         todoFieUtils.cleanFile();
 
