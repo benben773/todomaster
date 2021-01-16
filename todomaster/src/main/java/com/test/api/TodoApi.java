@@ -3,6 +3,7 @@ package com.test.api;
 import com.test.service.impl.ExecuServiceProxy;
 import com.test.service.ExecuService;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Arrays;
  */
 public class TodoApi {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println(Arrays.toString(args));
         ExecuService commandService = new ExecuServiceProxy();
         commandService.execute(args);

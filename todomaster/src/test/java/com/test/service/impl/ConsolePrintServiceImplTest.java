@@ -14,18 +14,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConsolePrintServiceImplTest {
     PrintService consolePrintService = new ConsolePrintServiceImpl();
-    ProcessItemservice processItemservice = new ProcessServiceImpl();
+    ProcessItemservice processItemservice = new ProcessTxtServiceImpl();
 
     @BeforeEach
-    void setUp() {
-        ProcessServiceImpl.todos = new HashMap<>();
+    void setUp() throws IOException {
+        TodoJsonFileUtils todoFieUtils = new TodoJsonFileUtils();
+        todoFieUtils.cleanFile();
     }
 
     @Test
     void printAllItem() throws IOException {
-        processItemservice.add(new Item("apple"));
-        processItemservice.add(new Item("apple1"));
-        processItemservice.add(new Item("appledone"));
+        processItemservice.addUserItem(new Item("apple"));
+        processItemservice.addUserItem(new Item("apple1"));
+        processItemservice.addUserItem(new Item("appledone"));
         processItemservice.done(3L);
         List<Item> allItems = processItemservice.getAllItems();
         assertEquals(3, allItems.size());

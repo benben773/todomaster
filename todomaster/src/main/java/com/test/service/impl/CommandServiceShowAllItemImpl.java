@@ -23,7 +23,7 @@ public class CommandServiceShowAllItemImpl implements CommandService {
 
     @Override
     public void doCommand(String[] args) throws IOException {
-        List<Item> allItems = processItemservice.getAllItems();
+        List<Item> allItems = processItemservice.getUserItems();
         consoleService.printAllItems(allItems);
     }
 }

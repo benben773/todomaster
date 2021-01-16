@@ -1,5 +1,7 @@
 package com.test.service;
 
+import java.io.IOException;
+
 /**
  * 命令行输入解析打印服务
  * @创建人 ls
@@ -9,5 +11,5 @@ public interface ExecuService {
     /**
      * 命令行输入解析打印服务
      */
-    void execute(String[] args);
+    void execute(String[] args) throws IOException;
 }

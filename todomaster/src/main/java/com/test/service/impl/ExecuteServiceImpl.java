@@ -12,37 +12,30 @@ import java.util.Map;
  * @date ：Created in 2020/12/29 7:06
  */
 public class ExecuteServiceImpl implements ExecuService {
-    ProcessItemservice addService;
-    PreparePrintService preparePrintService;
-    PrintService consoleService;
+    ProcessItemservice processItemservice;
+    PrintService printService;
     Map<Command.CommandEnum, CommandService> CommandServiceMap = new HashMap<>();
 
-    public ExecuteServiceImpl(ProcessItemservice addService, PreparePrintService preparePrintService, PrintService consoleService) {
-        this.addService = addService;
-        this.preparePrintService = preparePrintService;
-        this.consoleService = consoleService;
-        CommandServiceMap.put(Command.CommandEnum.add, new CommandServiceAddImpl(addService, preparePrintService, consoleService));
-        CommandServiceMap.put(Command.CommandEnum.done, new CommandServiceDoneImpl(addService, preparePrintService, consoleService));
-        CommandServiceMap.put(Command.CommandEnum.list, new CommandServiceShowTodoImpl(addService,preparePrintService, consoleService));
-        CommandServiceMap.put(Command.CommandEnum.listall, new CommandServiceShowAllItemImpl(addService, consoleService));
-        CommandServiceMap.put(Command.CommandEnum.loginu, new CommandLoginServiceImpl(addService, consoleService));
-        CommandServiceMap.put(Command.CommandEnum.logout, new CommandLogoutServiceImpl(addService, consoleService));
+    public ExecuteServiceImpl(ProcessItemservice processItemservice, PrintService printService) {
+        this.processItemservice = processItemservice;
+        this.printService = printService;
+        CommandServiceMap.put(Command.CommandEnum.add, new CommandAddServiceAddImpl(processItemservice, printService));
+        CommandServiceMap.put(Command.CommandEnum.done, new CommandServiceDoneImpl(processItemservice, printService));
+        CommandServiceMap.put(Command.CommandEnum.list, new CommandServiceShowTodoImpl(processItemservice, printService));
+        CommandServiceMap.put(Command.CommandEnum.listall, new CommandServiceShowAllItemImpl(processItemservice, printService));
+        CommandServiceMap.put(Command.CommandEnum.loginu, new CommandLoginServiceImpl(processItemservice, printService));
+        CommandServiceMap.put(Command.CommandEnum.logout, new CommandLogoutServiceImpl(processItemservice, printService));
     }
 
     @Override
-    public void execute(String[] args) {
+    public void execute(String[] args) throws IOException {
         Parse parse = new Parse();
         final Command command = parse.parseArray(args);
         if (!CommandServiceMap.keySet().contains(command.getCommandType())) {
             throw new IllegalArgumentException("error input command!");
         }
-        try {
-            CommandServiceMap.get(command.getCommandType()).doCommand(args);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        CommandServiceMap.get(command.getCommandType()).doCommand(args);
     }
-
 
 
 }

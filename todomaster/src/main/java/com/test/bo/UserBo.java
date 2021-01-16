@@ -5,9 +5,9 @@ package com.test.bo;
  * @date ：Created in 2021/1/2 16:14
  */
 public class UserBo {
+    private String index;
     private String name;
     private String password;
-    private String index;
 
     public UserBo(String name, String password, String index) {
         this.name = name;

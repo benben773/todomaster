@@ -16,11 +16,5 @@ import java.util.List;
  * @date ：Created in 2021/1/2 15:39
  */
 public class ConfigParseTest {
-    @Test
-    void name() throws ConfigurationException {
-        UserInfoSerivce configs = new UserInfoXmlSerivceImpl();
-        List<UserBo> userInfos = configs.getUserInfo();
-        Assertions.assertEquals(2, userInfos.size());
-        Assertions.assertEquals("ls1", userInfos.get(1).getName());
-    }
+
 }

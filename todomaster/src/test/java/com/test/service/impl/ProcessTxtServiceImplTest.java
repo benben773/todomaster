@@ -29,9 +29,9 @@ public class ProcessTxtServiceImplTest {
 
         @Test
         void should_get_three_dotos_and_fist_done() throws IOException {
-            processTxtService.add(new Item("apple"));
-            processTxtService.add(new Item("banana"));
-            processTxtService.add(new Item("cat"));
+            processTxtService.addUserItem(new Item("apple"));
+            processTxtService.addUserItem(new Item("banana"));
+            processTxtService.addUserItem(new Item("cat"));
             File todoFile = new File("C:/data/todoList.json");
             assertEquals(true, todoFile.exists());
             processTxtService.done(1L);

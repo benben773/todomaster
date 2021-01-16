@@ -11,7 +11,6 @@ class UserInfoXmlSerivceImplTest {
 
     @Test
     void should_set_currentUser_info() {
-        long index = 4L;
         CurrentUserBo bo = userInfoXmlSerivce.writeCurrentUserInof( "userId");
         assertNotNull(bo);
     }

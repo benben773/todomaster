@@ -5,17 +5,20 @@ package com.test.bo;
  * @date ：Created in 2020/12/28 19:34
  */
 public class Item {
-    private boolean done = false;
     private long index;
+    private String name;
+    private boolean done = false;
+    private String userIndex;
 
     public Item() {
     }
 
+    public void setUserIndex(String userIndex) {
+        this.userIndex = userIndex;
+    }
     public String getName() {
         return name;
     }
-
-    private String name;
 
     public Item(String name) {
         index = 0L;
@@ -31,10 +34,15 @@ public class Item {
     }
 
     public long getIndex() {
-        return this.index ;
+        return this.index;
     }
 
     public void setIndex(Long index) {
         this.index = index.longValue();
     }
+
+    public String getUserIndex() {
+        return userIndex;
+    }
+
 }

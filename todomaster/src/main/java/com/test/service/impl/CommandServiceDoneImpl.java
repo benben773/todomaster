@@ -2,7 +2,6 @@ package com.test.service.impl;
 
 import com.test.service.CommandService;
 import com.test.service.ProcessItemservice;
-import com.test.service.PreparePrintService;
 import com.test.service.PrintService;
 
 import java.io.IOException;
@@ -15,7 +14,7 @@ public class CommandServiceDoneImpl implements CommandService {
     ProcessItemservice addService;
     PrintService consoleService;
 
-    public CommandServiceDoneImpl(ProcessItemservice addService, PreparePrintService preparePrintService, PrintService consoleService) {
+    public CommandServiceDoneImpl(ProcessItemservice addService, PrintService consoleService) {
         this.addService = addService;
         this.consoleService = consoleService;
     }
